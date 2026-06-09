@@ -1,1 +1,17 @@
-<p>invoice-pages.component works!</p>
+<div class="cko-page">
+  <div class="cko-page__header">
+    <div>
+      <h1 class="cko-page__title">Calendario de Facturas</h1>
+      <p class="cko-page__subtitle">Visualiza y gestiona todas las facturas registradas</p>
+    </div>
+    <div class="cko-page__legend">
+      <span class="cko-legend__item cko-legend__item--pagada">Pagada</span>
+      <span class="cko-legend__item cko-legend__item--pendiente">Pendiente</span>
+      <span class="cko-legend__item cko-legend__item--cancelada">Cancelada</span>
+    </div>
+  </div>
+
+  <div class="cko-calendar-wrapper">
+    <div #calendarEl class="cko-calendar-el"></div>
+  </div>
+</div>
