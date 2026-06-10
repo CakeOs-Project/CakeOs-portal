@@ -1,0 +1,14 @@
+.logo-container {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.logo-container img {
+  width: 70px;
+}
+
+.logo-container h1 {
+  margin-top: 10px;
+  font-size: 2rem;
+  color: #151c31;
+}

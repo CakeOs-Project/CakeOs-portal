@@ -1,0 +1,29 @@
+.login-page {
+
+  min-height: 100vh;
+
+  background: #f4f4f4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 24px;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 380px;
+}
+
+.forgot-password {
+  display: block;
+
+  margin-bottom: 24px;
+
+  color: #D89B34;
+
+  text-decoration: none;
+
+  font-size: 14px;
+}

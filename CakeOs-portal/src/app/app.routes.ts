@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { Login } from './feature/security/login/pages/login-pages.component';
+import { Login } from './feature/auth/page/login/login';
 import { InvoicePagesComponent } from './feature/business/invoice/invoice-pages.component';
 
 export const routes: Routes = [
@@ -13,7 +13,7 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'facturas',
+    redirectTo: 'auth',
     pathMatch: 'full',
   },
 ];
