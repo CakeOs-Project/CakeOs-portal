@@ -1,0 +1,45 @@
+.auth-container {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  min-height: 650px;
+
+  background: white;
+  border-radius: 32px;
+
+  overflow: hidden;
+
+  box-shadow:
+    0 10px 25px rgba(0,0,0,.08);
+}
+
+.image-section {
+  flex: 1.4;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+}
+
+.image-section img {
+  width: 100%;
+  max-width: 600px;
+}
+
+.form-section {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px;
+}
+
+@media (max-width: 992px) {
+  .image-section {
+    display: none;
+  }
+}
