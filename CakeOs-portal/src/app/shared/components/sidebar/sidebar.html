@@ -1,0 +1,22 @@
+<aside class="sidebar">
+  <div class="sidebar__brand">
+    <img src="assets/logo/cakeos-logo-light.svg" alt="CakeOS">
+    <span>CakeOS</span>
+  </div>
+
+  <nav class="sidebar__nav">
+    @for (item of menuItems; track item.label) {
+      @if (item.route) {
+        <a class="sidebar__item" [routerLink]="item.route" routerLinkActive="sidebar__item--active">
+          <span class="sidebar__icon" [innerHTML]="item.icon"></span>
+          <span class="sidebar__label">{{ item.label }}</span>
+        </a>
+      } @else {
+        <div class="sidebar__item">
+          <span class="sidebar__icon" [innerHTML]="item.icon"></span>
+          <span class="sidebar__label">{{ item.label }}</span>
+        </div>
+      }
+    }
+  </nav>
+</aside>

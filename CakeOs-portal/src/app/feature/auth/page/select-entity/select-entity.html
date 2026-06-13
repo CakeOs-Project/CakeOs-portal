@@ -1,0 +1,36 @@
+<div class="select-entity-page">
+
+  <div class="entity-container">
+
+    <img class="brand-logo" src="assets/logo/cakeos-logo.svg" alt="CakeOS">
+
+    <div class="entity-card">
+
+      <div class="logo-container">
+        <img src="assets/logo/cakeos-logo.svg" alt="CakeOS">
+        <h1>CakeOS</h1>
+      </div>
+
+      <div class="select-wrapper">
+        <select [(ngModel)]="entidadSeleccionada">
+          <option value="" disabled selected>Seleccionar Sede</option>
+          @for (entidad of entidades; track entidad.id) {
+            <option [value]="entidad.id">{{ entidad.nombre }}</option>
+          }
+        </select>
+        <span class="chevron">⌄</span>
+      </div>
+
+      <button
+        type="button"
+        class="continue-button"
+        [disabled]="!entidadSeleccionada"
+        (click)="continuar()">
+        Continuar →
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
