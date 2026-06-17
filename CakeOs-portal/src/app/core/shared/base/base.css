@@ -1,0 +1,11 @@
+.base {
+  display: flex;
+  height: 100vh;
+  width: 100%;
+}
+
+.base__content {
+  flex: 1;
+  min-width: 0;
+  overflow: auto;
+}

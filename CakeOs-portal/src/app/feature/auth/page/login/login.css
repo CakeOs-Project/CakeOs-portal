@@ -16,6 +16,12 @@
   max-width: 380px;
 }
 
+.login-error {
+  margin: -8px 0 16px;
+  color: #dc2626;
+  font-size: 13px;
+}
+
 .forgot-password {
   display: block;
 
