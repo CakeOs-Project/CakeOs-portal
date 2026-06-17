@@ -6,25 +6,31 @@
 
       <app-auth-logo></app-auth-logo>
 
-      <form>
+      <form (ngSubmit)="onSubmit()">
 
         <app-auth-input
           label="Correo"
-          placeholder="correo@gmail.com">
+          placeholder="correo@gmail.com"
+          [(value)]="email">
         </app-auth-input>
 
         <app-auth-input
           label="Contraseña"
           type="password"
-          placeholder="********">
+          placeholder="********"
+          [(value)]="password">
         </app-auth-input>
 
-        <a class="forgot-password">
+        @if (errorMessage()) {
+          <p class="login-error">{{ errorMessage() }}</p>
+        }
+
+        <a class="forgot-password" routerLink="/auth/forgot-password">
           ¿Olvidaste tu contraseña?
         </a>
 
         <app-auth-button>
-          Iniciar Sesión →
+          {{ loading() ? 'Ingresando...' : 'Iniciar Sesión →' }}
         </app-auth-button>
 
       </form>
