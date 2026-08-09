@@ -1,6 +1,6 @@
 import { Injectable, PLATFORM_ID, computed, inject, signal } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { LoginResponse, PermissionAction } from '../models/auth.model';
+import { ApiResponse, LoginResponse, PermissionAction } from '../models/auth.model';
 
 const SESSION_STORAGE_KEY = 'cakeos.session';
 
@@ -61,10 +61,33 @@ export class SessionService {
     }
 
     try {
-      return JSON.parse(raw) as LoginResponse;
+      const stored: unknown = JSON.parse(raw);
+      // Compatibilidad con sesiones que se guardaron antes de extraer `data`
+      // de la respuesta estándar de la API.
+      const session = this.isApiResponse(stored) ? stored.data : stored;
+
+      if (this.isLoginResponse(session)) {
+        return session;
+      }
+
+      localStorage.removeItem(SESSION_STORAGE_KEY);
+      return null;
     } catch {
       localStorage.removeItem(SESSION_STORAGE_KEY);
       return null;
     }
+  }
+
+  private isApiResponse(value: unknown): value is ApiResponse<LoginResponse> {
+    return typeof value === 'object' && value !== null && 'data' in value && 'success' in value;
+  }
+
+  private isLoginResponse(value: unknown): value is LoginResponse {
+    return typeof value === 'object'
+      && value !== null
+      && 'token' in value
+      && 'modules' in value
+      && typeof value.token === 'string'
+      && Array.isArray(value.modules);
   }
 }

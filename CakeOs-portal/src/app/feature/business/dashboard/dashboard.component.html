@@ -1,0 +1,47 @@
+<section class="dashboard">
+  <header class="dashboard__header">
+    <div>
+      <p class="dashboard__eyebrow">RESUMEN DEL NEGOCIO</p>
+      <h1>Buenos días, Marta</h1>
+      <p class="dashboard__intro">Así va el rendimiento de tu pastelería hoy.</p>
+    </div>
+    <div class="dashboard__header-actions">
+      <span class="dashboard__role">Rol activo · Dueño</span>
+      <button class="dashboard__export" type="button" (click)="exportClose()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"></path><path d="m7 10 5 5 5-5"></path><path d="M5 21h14a2 2 0 0 0 2-2v-3"></path><path d="M3 16v3a2 2 0 0 0 2 2"></path></svg>
+        Exportar cierre
+      </button>
+    </div>
+  </header>
+
+  <div class="dashboard__status"><span class="dashboard__status-dot"></span><strong>Operación al día</strong><span>Todos los pedidos programados están en curso.</span><span class="dashboard__status-time">Actualizado hace 2 min</span></div>
+
+  <div class="dashboard__section-heading">
+    <div><p class="dashboard__eyebrow">HOY DE UN VISTAZO</p><h2>Todo sigue en movimiento.</h2></div>
+    <div class="dashboard__periods" aria-label="Periodo del reporte">
+      @for (item of periods; track item) {
+        <button type="button" [class.dashboard__period--active]="period() === item" (click)="setPeriod(item)">{{ item }}</button>
+      }
+    </div>
+  </div>
+
+  <div class="dashboard__metrics">
+    <article class="metric metric--gold"><span>Ventas de hoy</span><strong>$ 1.680.000</strong><small>↗ 12,4% frente a ayer</small></article>
+    <article class="metric metric--dark"><span>Ticket promedio</span><strong>$ 64.615</strong><small>↗ 4,1% · 26 encargos facturados</small></article>
+    <article class="metric metric--green"><span>Saldo por cobrar</span><strong>$ 486.000</strong><small>3 facturas con abono parcial</small></article>
+  </div>
+
+  <article class="dashboard-card dashboard-card--sales">
+    <div class="dashboard-card__heading"><div><p class="dashboard__eyebrow">RENDIMIENTO SEMANAL</p><h3>Ventas de la semana</h3><p>Total facturado por día, incluyendo abonos de encargos.</p></div><span class="dashboard-card__total">$ 6.640.000</span></div>
+    <div class="sales-chart" role="img" aria-label="La facturación crece hasta el sábado y disminuye el domingo">
+      <svg viewBox="0 0 900 245" preserveAspectRatio="none" aria-hidden="true"><defs><linearGradient id="sales-fill" x1="0" x2="0" y1="0" y2="1"><stop offset="0%" stop-color="#edbc56" stop-opacity=".42"></stop><stop offset="100%" stop-color="#edbc56" stop-opacity="0"></stop></linearGradient></defs><g class="sales-chart__grid"><path d="M0 36H900M0 102H900M0 168H900M0 234H900"></path></g><path class="sales-chart__area" d="M0 234V150 C70 133 100 130 150 140 S245 180 300 165 S390 110 450 98 S540 70 590 42 S675 24 730 60 S840 132 900 92 V234Z"></path><path class="sales-chart__line" d="M0 150 C70 133 100 130 150 140 S245 180 300 165 S390 110 450 98 S540 70 590 42 S675 24 730 60 S840 132 900 92"></path></svg>
+      <div class="sales-chart__days"><span>Lun</span><span>Mar</span><span>Mié</span><span>Jue</span><span>Vie</span><span>Sáb</span><span>Dom</span></div>
+    </div>
+    <footer class="dashboard-card__insight"><strong>Sábado concentra el 27% de la semana</strong><span>Sugerencia: adelantar horneado del viernes en la tarde.</span></footer>
+  </article>
+
+  <div class="dashboard__lower-grid">
+    <article class="dashboard-card dashboard-card--list"><div class="dashboard-card__heading"><div><p class="dashboard__eyebrow">ACUMULADO DEL MES</p><h3>Ingresos por método</h3><p>Distribución de los pagos recibidos.</p></div></div><div class="stat-list">@for (method of paymentMethods; track method.name) {<div class="stat-list__item"><div class="stat-list__top"><strong>{{ method.name }}</strong><span>{{ method.amount }}</span></div><div class="progress"><span [style.width.%]="method.percentage"></span></div><small>{{ method.percentage }}% del total</small></div>}</div><footer class="dashboard-card__sum"><span>Total</span><strong>$ 6.640.000</strong></footer></article>
+    <article class="dashboard-card dashboard-card--list"><div class="dashboard-card__heading"><div><p class="dashboard__eyebrow">ÚLTIMOS 30 DÍAS</p><h3>Productos más vendidos</h3><p>Por unidades despachadas.</p></div></div><div class="stat-list stat-list--products">@for (product of products; track product.name) {<div class="stat-list__item"><div class="stat-list__top"><strong>{{ product.name }}</strong><span>{{ product.detail }}</span></div><div class="progress progress--gold"><span [style.width.%]="product.percentage"></span></div></div>}</div></article>
+  </div>
+</section>

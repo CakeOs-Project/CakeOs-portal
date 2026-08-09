@@ -1,4 +1,4 @@
-import { Component, computed, inject } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SessionService } from '../../../core/services/session.service';
@@ -29,7 +29,7 @@ const ICONS: Record<string, string> = {
 };
 
 /** Item de menu fijo, visible sin importar los modulos del login. */
-const DASHBOARD_ITEM: ModuleMenuConfig = { label: 'Dashboard', icon: 'dashboard', route: '/facturas' };
+const DASHBOARD_ITEM: ModuleMenuConfig = { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' };
 
 /**
  * Mapea `moduleName` (tal como viene en `LoginResponse.modules`) a la
@@ -61,6 +61,9 @@ export class Sidebar {
   private readonly sanitizer = inject(DomSanitizer);
   private readonly sessionService = inject(SessionService);
 
+  /** Conserva el modo compacto durante la navegacion sin duplicar el menu. */
+  readonly collapsed = signal(false);
+
   readonly menuItems = computed<MenuItem[]>(() => {
     const items = [this.toMenuItem(DASHBOARD_ITEM)];
 
@@ -74,6 +77,10 @@ export class Sidebar {
 
     return items;
   });
+
+  toggle(): void {
+    this.collapsed.update((isCollapsed) => !isCollapsed);
+  }
 
   private toMenuItem(config: ModuleMenuConfig): MenuItem {
     return { label: config.label, icon: this.icon(config.icon), route: config.route };

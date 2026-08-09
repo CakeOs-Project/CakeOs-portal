@@ -28,3 +28,12 @@ export interface LoginResponse {
   isCompleteInfo: boolean;
   modules: ModuleAccess[];
 }
+
+/** Contrato común que devuelve la API para las respuestas exitosas. */
+export interface ApiResponse<T> {
+  success: boolean;
+  statusCode: number;
+  message: string;
+  data: T | null;
+  errors?: Record<string, string[]>;
+}

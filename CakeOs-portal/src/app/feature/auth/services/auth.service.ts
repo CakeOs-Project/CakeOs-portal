@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { Observable, tap } from 'rxjs';
+import { map, Observable, tap } from 'rxjs';
 import { environment } from '../../../../environments/environment';
-import { LoginRequest, LoginResponse } from '../../../core/models/auth.model';
+import { ApiResponse, LoginRequest, LoginResponse } from '../../../core/models/auth.model';
 import { SessionService } from '../../../core/services/session.service';
 
 @Injectable({ providedIn: 'root' })
@@ -13,8 +13,17 @@ export class AuthService {
 
   login(dto: LoginRequest): Observable<LoginResponse> {
     return this.http
-      .post<LoginResponse>(`${this.baseUrl}/login`, dto)
-      .pipe(tap((session) => this.sessionService.setSession(session)));
+      .post<ApiResponse<LoginResponse>>(`${this.baseUrl}/login`, dto)
+      .pipe(
+        map((response) => {
+          if (!response.success || !response.data) {
+            throw new Error(response.message || 'No fue posible iniciar sesión.');
+          }
+
+          return response.data;
+        }),
+        tap((session) => this.sessionService.setSession(session)),
+      );
   }
 
   logout(): void {

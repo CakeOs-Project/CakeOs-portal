@@ -25,6 +25,11 @@ export const routes: Routes = [
     canActivateChild: [loginGuard],
     children: [
       {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./feature/business/dashboard/dashboard.routes').then((m) => m.DASHBOARD_ROUTES),
+      },
+      {
         path: 'facturas',
         loadChildren: () =>
           import('./feature/business/invoice/invoice.routes').then((m) => m.INVOICE_ROUTES),
@@ -34,11 +39,11 @@ export const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: 'facturas',
+    redirectTo: 'dashboard',
     pathMatch: 'full',
   },
   {
     path: '**',
-    redirectTo: 'facturas',
+    redirectTo: 'dashboard',
   },
 ];

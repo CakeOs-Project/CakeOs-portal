@@ -1,18 +1,30 @@
-<aside class="sidebar">
+<aside class="sidebar" [class.sidebar--collapsed]="collapsed()">
   <div class="sidebar__brand">
     <img src="assets/logo/cakeos-logo-light.svg" alt="CakeOS">
     <span>CakeOS</span>
+    <button
+      class="sidebar__toggle"
+      type="button"
+      (click)="toggle()"
+      [attr.aria-label]="collapsed() ? 'Expandir menú lateral' : 'Contraer menú lateral'"
+      [attr.aria-expanded]="!collapsed()"
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="4" y="4" width="16" height="16" rx="3"></rect>
+        <path d="M10 4v16"></path>
+      </svg>
+    </button>
   </div>
 
   <nav class="sidebar__nav">
     @for (item of menuItems(); track item.label) {
       @if (item.route) {
-        <a class="sidebar__item" [routerLink]="item.route" routerLinkActive="sidebar__item--active">
+        <a class="sidebar__item" [routerLink]="item.route" routerLinkActive="sidebar__item--active" [attr.aria-label]="item.label" [attr.title]="collapsed() ? item.label : null">
           <span class="sidebar__icon" [innerHTML]="item.icon"></span>
           <span class="sidebar__label">{{ item.label }}</span>
         </a>
       } @else {
-        <div class="sidebar__item">
+        <div class="sidebar__item" [attr.title]="collapsed() ? item.label : null">
           <span class="sidebar__icon" [innerHTML]="item.icon"></span>
           <span class="sidebar__label">{{ item.label }}</span>
         </div>
