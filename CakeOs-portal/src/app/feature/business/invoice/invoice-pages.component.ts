@@ -9,6 +9,7 @@ import {
   inject,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { Router } from '@angular/router';
 import { Calendar, CalendarOptions, EventInput, EventClickArg, EventContentArg } from '@fullcalendar/core';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -101,6 +102,7 @@ export class InvoicePagesComponent implements AfterViewInit, OnDestroy {
 
   private calendar: Calendar | null = null;
   private platformId = inject(PLATFORM_ID);
+  private router = inject(Router);
 
   ngAfterViewInit(): void {
     if (!isPlatformBrowser(this.platformId)) return;
@@ -125,7 +127,7 @@ export class InvoicePagesComponent implements AfterViewInit, OnDestroy {
       eventContent: (arg: EventContentArg) => renderEventContent(arg),
       eventClick: (arg: EventClickArg) => {
         const id = arg.event.extendedProps['facturaId'] as string;
-        alert(`Abriendo detalle de la factura #${id}`);
+        this.router.navigate(['/facturas', id]);
       },
     };
 
