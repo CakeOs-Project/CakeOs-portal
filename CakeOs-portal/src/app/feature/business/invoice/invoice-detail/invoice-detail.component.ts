@@ -303,7 +303,7 @@ export class InvoiceDetailComponent implements OnInit {
   }
 
   goBack(): void {
-    this.router.navigate(['/facturas']);
+    this.router.navigate(['/factura']);
   }
 
   marcarTerminado(): void {

@@ -29,6 +29,6 @@ export class SelectEntity {
 
   continuar(): void {
     if (!this.entidadSeleccionada) return;
-    this.router.navigate(['/facturas']);
+    this.router.navigate(['/factura']);
   }
 }

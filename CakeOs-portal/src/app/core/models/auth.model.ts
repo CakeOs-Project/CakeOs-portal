@@ -7,11 +7,15 @@ export interface LoginRequest {
 
 export interface FormPermissions {
   formName: string;
+  route?: string;
+  path?: string;
   permissions: PermissionAction[];
 }
 
 export interface ModuleAccess {
   moduleName: string;
+  route?: string;
+  path?: string;
   forms: FormPermissions[];
 }
 

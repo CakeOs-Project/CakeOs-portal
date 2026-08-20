@@ -29,7 +29,7 @@ export class Login {
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
         this.loading.set(false);
-        this.router.navigateByUrl('/facturas');
+        this.router.navigateByUrl('/factura');
       },
       error: () => {
         this.loading.set(false);

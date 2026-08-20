@@ -1,0 +1,70 @@
+<section class="invoice-new">
+  <header class="invoice-new__header">
+    <div>
+      <p class="invoice-new__eyebrow">Factura</p>
+      <h1 class="invoice-new__title">New Invoice</h1>
+    </div>
+    <button type="button" class="invoice-new__button invoice-new__button--ghost">Cancel</button>
+  </header>
+
+  <div class="invoice-new__card">
+    <div class="invoice-new__steps">
+      <span class="invoice-new__step invoice-new__step--active">1</span>
+      <span class="invoice-new__step">2</span>
+      <span class="invoice-new__step">3</span>
+      <span class="invoice-new__step">4</span>
+    </div>
+
+    <div class="invoice-new__content">
+      <h2>Client Information</h2>
+      <p>Search for an existing client or enter details for a new one.</p>
+
+      <div class="invoice-new__search">
+        <input type="text" placeholder="Start typing a name or phone..." />
+        <button type="button">Search</button>
+      </div>
+
+      <div class="invoice-new__divider"><span>OR ENTER NEW</span></div>
+
+      <div class="invoice-new__grid">
+        <label>
+          <span>Full name *</span>
+          <input type="text" value="Jane Doe" />
+        </label>
+        <label>
+          <span>Phone number *</span>
+          <input type="text" value="(555) 123-4567" />
+        </label>
+        <label class="invoice-new__full">
+          <span>Email address</span>
+          <input type="email" value="jane.doe@example.com" />
+        </label>
+
+        <label>
+          <span>Fulfillment method *</span>
+          <select>
+            <option>Pickup</option>
+            <option>Delivery</option>
+          </select>
+        </label>
+        <label>
+          <span>Fulfillment date &amp; time *</span>
+          <input type="text" value="dd/mm/yyyy --:--" />
+        </label>
+      </div>
+
+      <div class="invoice-new__extras">
+        <div class="invoice-new__extras-header">
+          <span>Extras / Excedentes</span>
+          <button type="button">Add Extra</button>
+        </div>
+
+        <div class="invoice-new__extra-item">
+          <span>Item (e.g. Gold Topper)</span>
+          <strong>$ 0.00</strong>
+          <button type="button" aria-label="Remove item">×</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

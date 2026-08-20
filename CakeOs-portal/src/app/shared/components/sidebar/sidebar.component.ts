@@ -44,7 +44,7 @@ const MODULE_MENU: Record<string, ModuleMenuConfig> = {
   Clientes: { label: 'Clientes', icon: 'clientes', route: '/clientes' },
   Productos: { label: 'Productos', icon: 'productos', route: '/productos' },
   Parametros: { label: 'Parámetros', icon: 'parametros', route: '/parametros' },
-  Facturas: { label: 'Facturas', icon: 'pedidos', route: '/facturas' },
+  Facturas: { label: 'Factura', icon: 'pedidos', route: '/factura' },
   Pagos: { label: 'Pagos', icon: 'pagos', route: '/pagos' },
   Reportes: { label: 'Reportes', icon: 'reportes', route: '/reportes' },
 };

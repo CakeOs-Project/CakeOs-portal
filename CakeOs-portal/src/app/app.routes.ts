@@ -30,11 +30,11 @@ export const routes: Routes = [
           import('./feature/business/dashboard/dashboard.routes').then((m) => m.DASHBOARD_ROUTES),
       },
       {
-        path: 'facturas',
+        path: 'factura',
         loadChildren: () =>
           import('./feature/business/invoice/invoice.routes').then((m) => m.INVOICE_ROUTES),
       },
-      // Nuevos módulos: agregar aquí su propio <modulo>.routes.ts
+    
     ],
   },
   {
