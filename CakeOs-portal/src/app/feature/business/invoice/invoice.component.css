@@ -12,6 +12,12 @@
 
 }
 
+.invoice-new__card .invoice-new__header {
+  margin-top: 30px;
+  justify-content: flex-end;
+  padding: 0 30px;
+}
+
 .invoice-new__header {
   display: flex;
   align-items: center;
