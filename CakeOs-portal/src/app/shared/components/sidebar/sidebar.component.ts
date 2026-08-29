@@ -3,16 +3,15 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SessionService } from '../../../core/services/session.service';
 
-interface MenuItem {
+interface FormMenuItem {
   label: string;
+  route: string;
   icon: SafeHtml;
-  route?: string;
 }
 
-interface ModuleMenuConfig {
+interface ModuleMenuItem {
   label: string;
-  icon: keyof typeof ICONS;
-  route?: string;
+  forms: FormMenuItem[];
 }
 
 const ICONS: Record<string, string> = {
@@ -28,28 +27,20 @@ const ICONS: Record<string, string> = {
   parametros: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="21" x2="4" y2="14"/><line x1="4" y1="10" x2="4" y2="3"/><line x1="12" y1="21" x2="12" y2="12"/><line x1="12" y1="8" x2="12" y2="3"/><line x1="20" y1="21" x2="20" y2="16"/><line x1="20" y1="12" x2="20" y2="3"/><line x1="1" y1="14" x2="7" y2="14"/><line x1="9" y1="8" x2="15" y2="8"/><line x1="17" y1="16" x2="23" y2="16"/></svg>`,
 };
 
-/** Item de menu fijo, visible sin importar los modulos del login. */
-const DASHBOARD_ITEM: ModuleMenuConfig = { label: 'Dashboard', icon: 'dashboard', route: '/dashboard' };
+const DASHBOARD_CONFIG = { label: 'Dashboard', iconKey: 'dashboard' as keyof typeof ICONS, route: '/dashboard' };
 
-/**
- * Mapea `moduleName` (tal como viene en `LoginResponse.modules`) a la
- * presentacion del item en el sidebar. Si el backend agrega un modulo nuevo
- * que no esta aqui, se muestra con el icono/ruta por defecto hasta que se
- * registre su entrada.
- */
-const MODULE_MENU: Record<string, ModuleMenuConfig> = {
-  Seguridad: { label: 'Seguridad', icon: 'security', route: '/seguridad/usuarios' },
-  Usuarios: { label: 'Usuarios', icon: 'usuarios', route: '/seguridad/usuarios' },
-  Roles: { label: 'Roles', icon: 'roles', route: '/seguridad/roles' },
-  Clientes: { label: 'Clientes', icon: 'clientes', route: '/clientes' },
-  Productos: { label: 'Productos', icon: 'productos', route: '/productos' },
-  Parametros: { label: 'Parámetros', icon: 'parametros', route: '/parametros' },
-  Factura: { label: 'Factura', icon: 'pedidos', route: '/factura' },
-  Pagos: { label: 'Pagos', icon: 'pagos', route: '/pagos' },
-  Reportes: { label: 'Reportes', icon: 'reportes', route: '/reportes' },
+const FORM_ICON: Record<string, keyof typeof ICONS> = {
+  UserForm: 'usuarios',
+  RoleForm: 'roles',
+  InvoiceForm: 'pedidos',
+  ProductionForm: 'pedidos', // o un ícono propio si lo tenés (ej. 'horno')
+  ProductForm: 'productos',
+  ParameterForm: 'parametros',
+  PaymentForm: 'pagos',
+  ReportForm: 'reportes',
 };
 
-const DEFAULT_MODULE_ICON: keyof typeof ICONS = 'dashboard';
+const DEFAULT_FORM_ICON: keyof typeof ICONS = 'dashboard';
 
 @Component({
   selector: 'app-sidebar',
@@ -61,32 +52,30 @@ export class Sidebar {
   private readonly sanitizer = inject(DomSanitizer);
   private readonly sessionService = inject(SessionService);
 
-  /** Conserva el modo compacto durante la navegacion sin duplicar el menu. */
   readonly collapsed = signal(false);
 
-  readonly menuItems = computed<MenuItem[]>(() => {
-    const items = [this.toMenuItem(DASHBOARD_ITEM)];
+  readonly dashboardItem: FormMenuItem = {
+    label: DASHBOARD_CONFIG.label,
+    route: DASHBOARD_CONFIG.route,
+    icon: this.icon(DASHBOARD_CONFIG.iconKey),
+  };
 
-    for (const module of this.sessionService.modules()) {
-      const config = MODULE_MENU[module.moduleName] ?? {
-        label: module.moduleName,
-        icon: DEFAULT_MODULE_ICON,
-      };
-      items.push(this.toMenuItem(config));
-    }
-
-    return items;
-  });
-
-  toggle(): void {
-    this.collapsed.update((isCollapsed) => !isCollapsed);
-  }
-
-  private toMenuItem(config: ModuleMenuConfig): MenuItem {
-    return { label: config.label, icon: this.icon(config.icon), route: config.route };
-  }
+  readonly menuGroups = computed<ModuleMenuItem[]>(() =>
+    this.sessionService.modules().map((m) => ({
+      label: m.moduleName,
+      forms: m.forms.map((f) => ({
+        label: f.formName,
+        route: f.route ?? f.path ?? '',
+        icon: this.icon(FORM_ICON[f.formName] ?? DEFAULT_FORM_ICON),
+      })),
+    }))
+  );
 
   private icon(name: keyof typeof ICONS): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(ICONS[name]);
+  }
+
+  toggle(): void {
+    this.collapsed.update((isCollapsed) => !isCollapsed);
   }
 }

@@ -17,17 +17,21 @@
   </div>
 
   <nav class="sidebar__nav">
-    @for (item of menuItems(); track item.label) {
-      @if (item.route) {
+    <a class="sidebar__item" [routerLink]="dashboardItem.route" routerLinkActive="sidebar__item--active" [attr.aria-label]="dashboardItem.label" [attr.title]="collapsed() ? dashboardItem.label : null">
+      <span class="sidebar__icon" [innerHTML]="dashboardItem.icon"></span>
+      <span class="sidebar__label">{{ dashboardItem.label }}</span>
+    </a>
+
+    @for (group of menuGroups(); track group.label) {
+      @if (!collapsed()) {
+        <div class="sidebar__group-label">{{ group.label }}</div>
+      }
+
+      @for (item of group.forms; track item.route) {
         <a class="sidebar__item" [routerLink]="item.route" routerLinkActive="sidebar__item--active" [attr.aria-label]="item.label" [attr.title]="collapsed() ? item.label : null">
           <span class="sidebar__icon" [innerHTML]="item.icon"></span>
           <span class="sidebar__label">{{ item.label }}</span>
         </a>
-      } @else {
-        <div class="sidebar__item" [attr.title]="collapsed() ? item.label : null">
-          <span class="sidebar__icon" [innerHTML]="item.icon"></span>
-          <span class="sidebar__label">{{ item.label }}</span>
-        </div>
       }
     }
   </nav>

@@ -8,4 +8,5 @@
   flex: 1;
   min-width: 0;
   overflow: auto;
+  padding: 40px clamp(24px, 5vw, 76px) 56px;
 }

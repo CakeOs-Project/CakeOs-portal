@@ -1,13 +1,23 @@
-import { Component, signal } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
+import { SessionService } from '../../../core/services/session.service';
 
 type Period = 'Día' | 'Semana' | 'Mes';
 interface PaymentMethod { name: string; amount: string; percentage: number; }
 interface Product { name: string; detail: string; percentage: number; }
 
-@Component({ selector: 'app-dashboard', templateUrl: './dashboard.component.html', styleUrl: './dashboard.component.css' })
+@Component({
+  selector: 'app-dashboard',
+  templateUrl: './dashboard.component.html',
+  styleUrl: './dashboard.component.css' })
 export class DashboardComponent {
+
+  private userStore = inject(SessionService);
+
+  public readonly displayFullName = this.userStore.fullName;
+  public readonly displayRolName = this.userStore.rolName;
+
   readonly period = signal<Period>('Semana');
-  readonly periods: Period[] = ['Día', 'Semana', 'Mes'];
+  readonly periods: Period[] = ['Día' , 'Semana', 'Mes'];
   readonly paymentMethods: PaymentMethod[] = [
     { name: 'Efectivo', amount: '$ 2.480.000', percentage: 37 },
     { name: 'Transferencia', amount: '$ 3.120.000', percentage: 47 },
