@@ -1,30 +1,63 @@
 <section class="invoice-new">
-  <header class="invoice-new__header">
-    <div>
-      <p class="invoice-new__eyebrow">Factura</p>
-      <h1 class="invoice-new__title">New Invoice</h1>
-    </div>
+  <header class="topbar">
+    <h1 class="topbar__title">New Invoice</h1>
 
+    <div class="topbar__actions">
+      <!-- Buscador -->
+      <div class="topbar__search">
+        <input type="text" placeholder="Search clients, orders..." />
+      </div>
+
+      <div class="topbar__divider"></div>
+
+      <!-- Perfil de usuario (Solo texto) -->
+      <div class="topbar__profile">
+        <div class="topbar__profile-info">
+          <span class="topbar__profile-name">Employee</span>
+          <span class="topbar__profile-role">Owner</span>
+        </div>
+      </div>
+    </div>
   </header>
 
-  <div class="invoice-new__card">
-    <div class="invoice-new__steps">
-      <span class="invoice-new__step invoice-new__step--active">1</span>
-      <span class="invoice-new__step">2</span>
-      <span class="invoice-new__step">3</span>
-      <span class="invoice-new__step">4</span>
-    </div>
-
-    <div class="invoice-new__header">
+  <div class="invoice-new__card mb-24">
+    <div class="invoice-new__card-top">
+      <div>
+        <h2 class="invoice-new__card-title">Create Order</h2>
+        <p class="invoice-new__card-subtitle">Complete the steps below to generate a new bakery invoice.</p>
+      </div>
       <button type="button" class="invoice-new__button invoice-new__button--ghost">Cancel</button>
     </div>
 
-    <div class="invoice-new__content">
-      <h2>Client Information</h2>
-      <p>Search for an existing client or enter details for a new one.</p>
+    <div class="invoice-new__steps">
+      <div class="step-wrapper">
+        <span class="invoice-new__step invoice-new__step--active">1</span>
+        <span class="step-label">CLIENT INFO</span>
+      </div>
+      <div class="step-wrapper">
+        <span class="invoice-new__step">2</span>
+        <span class="step-label">ITEMS</span>
+      </div>
+      <div class="step-wrapper">
+        <span class="invoice-new__step">3</span>
+        <span class="step-label">DETAILS</span>
+      </div>
+      <div class="step-wrapper">
+        <span class="invoice-new__step">4</span>
+        <span class="step-label">SUMMARY</span>
+      </div>
+    </div>
+  </div>
 
+  <!-- TARJETA 2: Client Information -->
+  <div class="invoice-new__card">
+    <div class="invoice-new__content">
+      <h2 class="invoice-new__card-title">Client Information</h2>
+      <p class="invoice-new__card-subtitle">Search for an existing client or enter details for a new one.</p>
+
+      <label class="invoice-new__label-top">SEARCH EXISTING CLIENT</label>
       <div class="invoice-new__search">
-        <input type="text" placeholder="Start typing a name or phone..." />
+        <input type="text" placeholder="Start typing name or phone..." />
         <button type="button">Search</button>
       </div>
 
@@ -46,10 +79,11 @@
 
         <label>
           <span>Fulfillment method *</span>
-          <select>
-            <option>Pickup</option>
-            <option>Delivery</option>
-          </select>
+          <!-- Ajustado visualmente a lo que muestra la imagen -->
+          <div class="fulfillment-options">
+            <button type="button" class="btn-option active">Pickup</button>
+            <button type="button" class="btn-option">Delivery</button>
+          </div>
         </label>
         <label>
           <span>Fulfillment date &amp; time *</span>
@@ -58,6 +92,4 @@
       </div>
     </div>
   </div>
-
-
 </section>
