@@ -20,11 +20,11 @@ export class HeaderComponent {
   readonly imageError = signal(false);
 
   readonly userName = computed(() => {
-    return this.sessionService.fullName() || 'Employee';
+    return this.sessionService.fullName() || 'Empleado';
   });
 
   readonly userRole = computed(() => {
-    return this.sessionService.rolName() || 'Owner';
+    return this.sessionService.rolName() || 'Propietario';
   });
 
   readonly userInitials = computed(() => {
@@ -47,10 +47,10 @@ export class HeaderComponent {
   }
 
   onSettingsClick(): void {
-    console.log('Settings clicked');
+    console.log('Configuración click');
   }
 
   onHelpClick(): void {
-    console.log('Help clicked');
+    console.log('Ayuda click');
   }
 }

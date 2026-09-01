@@ -1,0 +1,156 @@
+<div class="step-card">
+  <div class="step-card__header">
+    <h2 class="step-card__title">Productos y Diseños</h2>
+    <p class="step-card__subtitle">Selecciona productos del catálogo y añade imágenes de referencia para el diseño.</p>
+  </div>
+
+  <div class="step-card__body">
+    <!-- Buscador en Catálogo -->
+    <div class="catalog-section">
+      <label class="field-label">BUSCAR EN CATÁLOGO</label>
+      <div class="search-input-box">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input
+          type="text"
+          class="catalog-input"
+          placeholder="Buscar en el catálogo para añadir un producto..."
+          [ngModel]="catalogSearchQuery()"
+          (ngModelChange)="onSearchChange($event)"
+          (focus)="isCatalogOpen.set(true)"
+        />
+      </div>
+
+      <!-- Menú Desplegable con Sugerencias -->
+      @if (isCatalogOpen() && filteredCatalog().length > 0) {
+        <div class="catalog-popover">
+          <div class="catalog-popover__header">
+            <span>Selecciona un producto para añadir</span>
+            <button type="button" class="catalog-popover__close" (click)="isCatalogOpen.set(false)">✕</button>
+          </div>
+          <div class="catalog-popover__list">
+            @for (product of filteredCatalog(); track product.id) {
+              <div class="catalog-item-row" (click)="onSelectProduct(product)">
+                <div class="catalog-item-info">
+                  <strong>{{ product.name }}</strong>
+                  <small>{{ product.description }}</small>
+                </div>
+                <div class="catalog-item-action">
+                  <span class="catalog-item-price">${{ product.price | number:'1.2-2' }}</span>
+                  <button type="button" class="catalog-add-btn">+ Añadir</button>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Lista de Productos Seleccionados -->
+    <div class="items-container">
+      @for (item of items(); track item.id; let i = $index) {
+        <div class="item-card">
+          <!-- Icono de Pastel -->
+          <div class="item-card__icon-box">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M20 21v-8a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8"></path>
+              <path d="M4 16s.5-1 2-1 2.5 2 4 2 2.5-2 4-2 2.5 2 4 2 2-1 2-1"></path>
+              <path d="M2 21h20"></path>
+              <path d="M7 8v3"></path>
+              <path d="M12 5v6"></path>
+              <path d="M17 8v3"></path>
+              <circle cx="12" cy="4" r="1"></circle>
+            </svg>
+          </div>
+
+          <!-- Información del Producto -->
+          <div class="item-card__details">
+            <h3 class="item-card__title">{{ item.name }}</h3>
+            <p class="item-card__desc">{{ item.description }}</p>
+          </div>
+
+          <!-- Selector de Cantidad, Precio y Eliminar -->
+          <div class="item-card__actions">
+            <div class="quantity-picker">
+              <button type="button" class="quantity-btn" (click)="decrementQuantity(i)" aria-label="Disminuir">-</button>
+              <span class="quantity-num">{{ item.quantity }}</span>
+              <button type="button" class="quantity-btn" (click)="incrementQuantity(i)" aria-label="Aumentar">+</button>
+            </div>
+
+            <span class="item-price">${{ (item.unitPrice * item.quantity) | number:'1.2-2' }}</span>
+
+            <button type="button" class="delete-btn" (click)="removeItem(i)" title="Eliminar producto" aria-label="Eliminar producto">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="3 6 5 6 21 6"></polyline>
+                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                <line x1="10" y1="11" x2="10" y2="17"></line>
+                <line x1="14" y1="11" x2="14" y2="17"></line>
+              </svg>
+            </button>
+          </div>
+        </div>
+      } @empty {
+        <div class="empty-state">
+          <p>No hay productos añadidos aún. Usa el buscador de catálogo para agregar productos al pedido.</p>
+        </div>
+      }
+    </div>
+
+    <!-- Notas de Decoración -->
+    <div class="notes-block">
+      <label class="field-label">NOTAS DE DECORACIÓN</label>
+      <textarea
+        class="notes-textarea"
+        rows="3"
+        placeholder="Describe colores específicos, temática, mensajes o dedicatorias..."
+        [ngModel]="decorationNotes()"
+        (ngModelChange)="onNotesChange($event)"
+      ></textarea>
+    </div>
+
+    <!-- Fotos de Referencia -->
+    <div class="photos-block">
+      <label class="field-label">FOTOS DE REFERENCIA</label>
+      <div class="photos-row">
+        <!-- Input de archivo oculto -->
+        <input
+          type="file"
+          #fileUploader
+          style="display: none"
+          accept="image/*"
+          (change)="onFileSelected($event)"
+        />
+
+        <!-- Zona de subida -->
+        <div class="photo-dropzone" (click)="fileUploader.click()" role="button" tabindex="0">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+            <circle cx="8.5" cy="8.5" r="1.5"></circle>
+            <polyline points="21 15 16 10 5 21"></polyline>
+          </svg>
+          <span>+ Añadir Foto</span>
+        </div>
+
+        <!-- Miniaturas de fotos subidas -->
+        @for (photo of photos(); track photo.id) {
+          <div class="photo-card">
+            <img [src]="photo.url" [alt]="photo.name" />
+            <button type="button" class="photo-remove-btn" (click)="removePhoto(photo.id)" title="Eliminar foto">✕</button>
+          </div>
+        }
+      </div>
+    </div>
+
+    <!-- Navegación entre pasos -->
+    <div class="step-card__footer">
+      <button type="button" class="btn-secondary" (click)="backToClient()">
+        &larr; Volver a Info Cliente
+      </button>
+      <button type="button" class="btn-primary" (click)="continueToDetails()">
+        Continuar a Detalles &rarr;
+      </button>
+    </div>
+  </div>
+</div>

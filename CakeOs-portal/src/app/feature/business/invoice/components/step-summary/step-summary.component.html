@@ -1,0 +1,36 @@
+<div class="step-card">
+  <div class="step-card__header">
+    <h2 class="step-card__title">Resumen del Pedido</h2>
+    <p class="step-card__subtitle">Revisa todos los detalles antes de generar la factura final.</p>
+  </div>
+
+  <div class="step-card__body">
+    <div class="summary-section">
+      <div class="summary-row">
+        <span>Cliente:</span>
+        <strong>{{ clientInfo().fullName }} ({{ clientInfo().phone }})</strong>
+      </div>
+      <div class="summary-row">
+        <span>Método de entrega:</span>
+        <strong>{{ clientInfo().fulfillmentMethod === 'pickup' ? 'Recoger en tienda' : 'Entrega a domicilio' }} · {{ clientInfo().fulfillmentDateTime }}</strong>
+      </div>
+      <div class="summary-row">
+        <span>Total productos:</span>
+        <strong>{{ items().length }} items</strong>
+      </div>
+      <div class="summary-row summary-row--total">
+        <span>Total a Facturar:</span>
+        <span class="total-amount">${{ itemsSubtotal() | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <div class="step-card__footer">
+      <button type="button" class="btn-secondary" (click)="backToDetails()">
+        &larr; Volver a Detalles
+      </button>
+      <button type="button" class="btn-primary btn-primary--generate" (click)="generateInvoice()">
+        Generar Factura
+      </button>
+    </div>
+  </div>
+</div>

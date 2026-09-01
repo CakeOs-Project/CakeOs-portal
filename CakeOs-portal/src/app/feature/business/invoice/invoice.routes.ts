@@ -6,11 +6,11 @@ export const INVOICE_ROUTES: Routes = [
   {
     path: '',
     component: InvoiceComponent,
-    data: { title: 'New Invoice' },
+    data: { title: 'Nueva Factura' },
   },
   {
     path: ':id',
     component: InvoiceDetailComponent,
-    data: { title: 'Order Details' },
+    data: { title: 'Detalle de Pedido' },
   },
 ];

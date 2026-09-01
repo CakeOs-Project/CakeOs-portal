@@ -4,7 +4,7 @@
   </div>
 
   <div class="header__right">
-    <!-- Search Bar -->
+    <!-- Barra de búsqueda -->
     <div class="header__search">
       <svg class="header__search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
         <circle cx="11" cy="11" r="8"></circle>
@@ -13,14 +13,14 @@
       <input
         type="text"
         class="header__search-input"
-        placeholder="Search clients, orders..."
+        placeholder="Buscar clientes, pedidos..."
         [ngModel]="searchQuery()"
         (ngModelChange)="onSearchChange($event)"
         aria-label="Buscar clientes o pedidos"
       />
     </div>
 
-    <!-- Action Buttons -->
+    <!-- Botones de Acción -->
     <div class="header__buttons">
       <button
         type="button"
@@ -50,10 +50,10 @@
       </button>
     </div>
 
-    <!-- Divider -->
+    <!-- Divisor -->
     <div class="header__divider"></div>
 
-    <!-- User Profile -->
+    <!-- Perfil de Usuario -->
     <div class="header__profile" role="button" tabindex="0">
       <div class="header__profile-info">
         <span class="header__profile-name">{{ userName() }}</span>

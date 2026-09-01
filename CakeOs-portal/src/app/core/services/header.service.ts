@@ -3,8 +3,8 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 
 const DEFAULT_ROUTE_TITLES: Record<string, string> = {
-  'dashboard': 'Dashboard',
-  'factura': 'New Invoice',
+  'dashboard': 'Panel Principal',
+  'factura': 'Nueva Factura',
   'produccion': 'Producción',
   'clientes': 'Clientes',
   'productos': 'Productos',
@@ -21,7 +21,7 @@ export class HeaderService {
   private readonly router = inject(Router);
   private readonly activatedRoute = inject(ActivatedRoute);
 
-  private readonly _title = signal<string>('New Invoice');
+  private readonly _title = signal<string>('Nueva Factura');
   private readonly _searchQuery = signal<string>('');
 
   readonly title = this._title.asReadonly();
@@ -83,7 +83,7 @@ export class HeaderService {
         this._title.set(formatted);
       }
     } catch {
-      // Ignore initial SSR or routing edge case
+      // Ignore initial edge cases
     }
   }
 }

@@ -1,0 +1,61 @@
+<div class="stepper-card">
+  <div class="stepper-card__top">
+    <div>
+      <h2 class="stepper-card__title">Crear Pedido</h2>
+      <p class="stepper-card__subtitle">Completa los siguientes pasos para generar una nueva factura de pastelería.</p>
+    </div>
+    <button type="button" class="stepper-card__cancel-btn" (click)="cancel()">
+      Cancelar
+    </button>
+  </div>
+
+  <div class="stepper-card__steps">
+    <!-- Paso 1: Info Cliente -->
+    <div class="step-item" (click)="goToStep(Step.ClientInfo)" role="button" tabindex="0">
+      @if (currentStep() > Step.ClientInfo) {
+        <span class="step-badge step-badge--completed" title="Información del cliente completada">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+      } @else {
+        <span class="step-badge" [class.step-badge--active]="currentStep() === Step.ClientInfo">1</span>
+      }
+      <span class="step-label" [class.step-label--active]="currentStep() === Step.ClientInfo">INFO CLIENTE</span>
+    </div>
+
+    <!-- Paso 2: Productos -->
+    <div class="step-item" (click)="goToStep(Step.Items)" role="button" tabindex="0">
+      @if (currentStep() > Step.Items) {
+        <span class="step-badge step-badge--completed" title="Productos completados">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+      } @else {
+        <span class="step-badge" [class.step-badge--active]="currentStep() === Step.Items">2</span>
+      }
+      <span class="step-label" [class.step-label--active]="currentStep() === Step.Items">PRODUCTOS</span>
+    </div>
+
+    <!-- Paso 3: Detalles -->
+    <div class="step-item" (click)="goToStep(Step.Details)" role="button" tabindex="0">
+      @if (currentStep() > Step.Details) {
+        <span class="step-badge step-badge--completed">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="20 6 9 17 4 12"></polyline>
+          </svg>
+        </span>
+      } @else {
+        <span class="step-badge" [class.step-badge--active]="currentStep() === Step.Details">3</span>
+      }
+      <span class="step-label" [class.step-label--active]="currentStep() === Step.Details">DETALLES</span>
+    </div>
+
+    <!-- Paso 4: Resumen -->
+    <div class="step-item" (click)="goToStep(Step.Summary)" role="button" tabindex="0">
+      <span class="step-badge" [class.step-badge--active]="currentStep() === Step.Summary">4</span>
+      <span class="step-label" [class.step-label--active]="currentStep() === Step.Summary">RESUMEN</span>
+    </div>
+  </div>
+</div>

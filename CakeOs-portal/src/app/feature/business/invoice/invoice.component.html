@@ -1,74 +1,24 @@
-<section class="invoice-new">
-  <div class="invoice-new__card mb-24">
-    <div class="invoice-new__card-top">
-      <div>
-        <h2 class="invoice-new__card-title">Create Order</h2>
-        <p class="invoice-new__card-subtitle">Complete the steps below to generate a new bakery invoice.</p>
-      </div>
-      <button type="button" class="invoice-new__button invoice-new__button--ghost">Cancel</button>
-    </div>
+<section class="invoice-container">
+  <!-- Stepper Header Component -->
+  <app-invoice-stepper />
 
-    <div class="invoice-new__steps">
-      <div class="step-wrapper">
-        <span class="invoice-new__step invoice-new__step--active">1</span>
-        <span class="step-label">CLIENT INFO</span>
-      </div>
-      <div class="step-wrapper">
-        <span class="invoice-new__step">2</span>
-        <span class="step-label">ITEMS</span>
-      </div>
-      <div class="step-wrapper">
-        <span class="invoice-new__step">3</span>
-        <span class="step-label">DETAILS</span>
-      </div>
-      <div class="step-wrapper">
-        <span class="invoice-new__step">4</span>
-        <span class="step-label">SUMMARY</span>
-      </div>
-    </div>
-  </div>
+  <!-- Step 1: Client Info Component -->
+  @if (currentStep() === Step.ClientInfo) {
+    <app-step-client />
+  }
 
-  <!-- TARJETA 2: Client Information -->
-  <div class="invoice-new__card">
-    <div class="invoice-new__content">
-      <h2 class="invoice-new__card-title">Client Information</h2>
-      <p class="invoice-new__card-subtitle">Search for an existing client or enter details for a new one.</p>
+  <!-- Step 2: Items & Visuals Component -->
+  @if (currentStep() === Step.Items) {
+    <app-step-items />
+  }
 
-      <label class="invoice-new__label-top">SEARCH EXISTING CLIENT</label>
-      <div class="invoice-new__search">
-        <input type="text" placeholder="Start typing name or phone..." />
-        <button type="button">Search</button>
-      </div>
+  <!-- Step 3: Details Component -->
+  @if (currentStep() === Step.Details) {
+    <app-step-details />
+  }
 
-      <div class="invoice-new__divider"><span>OR ENTER NEW</span></div>
-
-      <div class="invoice-new__grid">
-        <label>
-          <span>Full name *</span>
-          <input type="text" value="Jane Doe" />
-        </label>
-        <label>
-          <span>Phone number *</span>
-          <input type="text" value="(555) 123-4567" />
-        </label>
-        <label class="invoice-new__full">
-          <span>Email address</span>
-          <input type="email" value="jane.doe@example.com" />
-        </label>
-
-        <label>
-          <span>Fulfillment method *</span>
-          <!-- Ajustado visualmente a lo que muestra la imagen -->
-          <div class="fulfillment-options">
-            <button type="button" class="btn-option active">Pickup</button>
-            <button type="button" class="btn-option">Delivery</button>
-          </div>
-        </label>
-        <label>
-          <span>Fulfillment date &amp; time *</span>
-          <input type="text" value="dd/mm/yyyy --:--" />
-        </label>
-      </div>
-    </div>
-  </div>
+  <!-- Step 4: Summary Component -->
+  @if (currentStep() === Step.Summary) {
+    <app-step-summary />
+  }
 </section>

@@ -1,0 +1,23 @@
+<div class="step-card">
+  <div class="step-card__header">
+    <h2 class="step-card__title">Detalles y Opciones del Pedido</h2>
+    <p class="step-card__subtitle">Especifica sabores de bizcocho, rellenos e instrucciones especiales.</p>
+  </div>
+
+  <div class="step-card__body">
+    <div class="placeholder-box">
+      <div class="placeholder-icon">📋</div>
+      <h3>Paso 3: Detalles y personalización</h3>
+      <p>Total de productos añadidos: <strong>{{ items().length }} (${{ itemsSubtotal() | number:'1.2-2' }})</strong></p>
+    </div>
+
+    <div class="step-card__footer">
+      <button type="button" class="btn-secondary" (click)="backToItems()">
+        &larr; Volver a Productos
+      </button>
+      <button type="button" class="btn-primary" (click)="continueToSummary()">
+        Continuar a Resumen &rarr;
+      </button>
+    </div>
+  </div>
+</div>

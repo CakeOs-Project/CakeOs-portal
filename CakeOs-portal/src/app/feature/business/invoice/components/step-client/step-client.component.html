@@ -1,0 +1,100 @@
+<div class="step-card">
+  <div class="step-card__header">
+    <h2 class="step-card__title">Información del Cliente</h2>
+    <p class="step-card__subtitle">Busca un cliente existente o ingresa los datos de uno nuevo.</p>
+  </div>
+
+  <div class="step-card__body">
+    <!-- Buscar cliente existente -->
+    <label class="field-label">BUSCAR CLIENTE EXISTENTE</label>
+    <div class="search-row">
+      <input
+        type="text"
+        class="field-input"
+        placeholder="Escribe nombre o teléfono..."
+        [ngModel]="searchQuery()"
+        (ngModelChange)="searchQuery.set($event)"
+      />
+      <button type="button" class="search-btn" (click)="onSearch()">Buscar</button>
+    </div>
+
+    <!-- Divisor -->
+    <div class="or-divider"><span>O INGRESAR NUEVO</span></div>
+
+    <!-- Cuadrícula del formulario -->
+    <div class="form-grid">
+      <label class="form-group">
+        <span class="field-label">Nombre completo *</span>
+        <input
+          type="text"
+          class="field-input"
+          [ngModel]="clientInfo().fullName"
+          (ngModelChange)="onNameChange($event)"
+          placeholder="Nombre del cliente"
+        />
+      </label>
+
+      <label class="form-group">
+        <span class="field-label">Teléfono / Celular *</span>
+        <input
+          type="text"
+          class="field-input"
+          [ngModel]="clientInfo().phone"
+          (ngModelChange)="onPhoneChange($event)"
+          placeholder="(555) 123-4567"
+        />
+      </label>
+
+      <label class="form-group form-group--full">
+        <span class="field-label">Correo electrónico</span>
+        <input
+          type="email"
+          class="field-input"
+          [ngModel]="clientInfo().email"
+          (ngModelChange)="onEmailChange($event)"
+          placeholder="correo@ejemplo.com"
+        />
+      </label>
+
+      <div class="form-group">
+        <span class="field-label">Método de entrega *</span>
+        <div class="fulfillment-toggle">
+          <button
+            type="button"
+            class="toggle-btn"
+            [class.toggle-btn--active]="clientInfo().fulfillmentMethod === 'pickup'"
+            (click)="setFulfillmentMethod('pickup')"
+          >
+            Recoger en tienda
+          </button>
+          <button
+            type="button"
+            class="toggle-btn"
+            [class.toggle-btn--active]="clientInfo().fulfillmentMethod === 'delivery'"
+            (click)="setFulfillmentMethod('delivery')"
+          >
+            Domicilio
+          </button>
+        </div>
+      </div>
+
+      <label class="form-group">
+        <span class="field-label">Fecha y hora de entrega *</span>
+        <input
+          type="datetime-local"
+          class="field-input"
+          [ngModel]="clientInfo().fulfillmentDateTime"
+          (ngModelChange)="onDateChange($event)"
+        />
+      </label>
+    </div>
+
+    <!-- Acciones al pie -->
+    <div class="step-card__footer">
+      <div></div>
+      <button type="button" class="btn-primary" (click)="continueToItems()">
+        Continuar a Productos &rarr;
+      </button>
+    </div>
+  </div>
+</div>

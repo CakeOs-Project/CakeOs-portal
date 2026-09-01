@@ -3,17 +3,6 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SessionService } from '../../../core/services/session.service';
 
-
-
-@Component({
-  selector: 'app-sidebar',
-  standalone: true,
-  imports: [],
-  templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.css']
-})
-export class SidebarComponent { }
-
 interface FormMenuItem {
   label: string;
   route: string;
@@ -44,7 +33,7 @@ const FORM_ICON: Record<string, keyof typeof ICONS> = {
   UserForm: 'usuarios',
   RoleForm: 'roles',
   InvoiceForm: 'pedidos',
-  ProductionForm: 'pedidos', // o un ícono propio si lo tenés (ej. 'horno')
+  ProductionForm: 'pedidos',
   ProductForm: 'productos',
   ParameterForm: 'parametros',
   PaymentForm: 'pagos',
@@ -55,6 +44,7 @@ const DEFAULT_FORM_ICON: keyof typeof ICONS = 'dashboard';
 
 @Component({
   selector: 'app-sidebar',
+  standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.css',
@@ -90,3 +80,5 @@ export class Sidebar {
     this.collapsed.update((isCollapsed) => !isCollapsed);
   }
 }
+
+export { Sidebar as SidebarComponent };
