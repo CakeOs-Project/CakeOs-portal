@@ -1,11 +1,11 @@
-.base {
+.layout {
   display: flex;
   height: 100vh;
   width: 100%;
   overflow: hidden;
 }
 
-.base__main {
+.layout__main {
   flex: 1;
   min-width: 0;
   display: flex;
@@ -15,7 +15,7 @@
   background: #f4f5f7;
 }
 
-.base__content {
+.layout__content {
   flex: 1;
   min-width: 0;
   overflow-y: auto;

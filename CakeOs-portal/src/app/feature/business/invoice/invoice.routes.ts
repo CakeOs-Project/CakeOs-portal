@@ -6,9 +6,11 @@ export const INVOICE_ROUTES: Routes = [
   {
     path: '',
     component: InvoiceComponent,
+    data: { title: 'New Invoice' },
   },
   {
     path: ':id',
     component: InvoiceDetailComponent,
+    data: { title: 'Order Details' },
   },
 ];

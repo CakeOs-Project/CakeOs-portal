@@ -3,6 +3,17 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SessionService } from '../../../core/services/session.service';
 
+
+
+@Component({
+  selector: 'app-sidebar',
+  standalone: true,
+  imports: [],
+  templateUrl: './sidebar.component.html',
+  styleUrls: ['./sidebar.component.css']
+})
+export class SidebarComponent { }
+
 interface FormMenuItem {
   label: string;
   route: string;

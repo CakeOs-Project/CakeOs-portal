@@ -1,0 +1,209 @@
+.app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 68px;
+  padding: 0 32px;
+  background: #ffffff;
+  border-bottom: 1px solid #e8eaed;
+  box-sizing: border-box;
+  font-family: 'DM Sans', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  z-index: 10;
+  position: sticky;
+  top: 0;
+  width: 100%;
+}
+
+.header__left {
+  display: flex;
+  align-items: center;
+}
+
+.header__title {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #111827;
+  letter-spacing: -0.02em;
+}
+
+.header__right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* Search Bar */
+.header__search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: #f9fafb;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  padding: 0 12px;
+  height: 38px;
+  width: 280px;
+  transition: border-color 150ms ease, background-color 150ms ease, box-shadow 150ms ease;
+}
+
+.header__search:focus-within {
+  background: #ffffff;
+  border-color: #d1d5db;
+  box-shadow: 0 0 0 3px rgba(229, 170, 53, 0.15);
+}
+
+.header__search-icon {
+  width: 16px;
+  height: 16px;
+  color: #9ca3af;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.header__search-input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  font-size: 13.5px;
+  color: #1f2937;
+  outline: none;
+  font-family: inherit;
+}
+
+.header__search-input::placeholder {
+  color: #9ca3af;
+}
+
+/* Header Buttons */
+.header__buttons {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.header__icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 8px;
+  color: #4b5563;
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.header__icon-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.header__icon-btn svg {
+  width: 19px;
+  height: 19px;
+}
+
+/* Divider */
+.header__divider {
+  width: 1px;
+  height: 24px;
+  background: #e5e7eb;
+  margin: 0 4px;
+}
+
+/* User Profile */
+.header__profile {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 6px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 150ms ease;
+  user-select: none;
+}
+
+.header__profile:hover {
+  background: #f9fafb;
+}
+
+.header__profile-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.header__profile-name {
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #111827;
+  line-height: 1.2;
+}
+
+.header__profile-role {
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #6b7280;
+  line-height: 1.2;
+  margin-top: 2px;
+}
+
+.header__avatar-wrapper {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+.header__avatar-img {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #e5e7eb;
+  background: #f3f4f6;
+}
+
+.header__avatar-fallback {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: #e5aa35;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 0 16px;
+    height: 60px;
+  }
+
+  .header__title {
+    font-size: 1.2rem;
+  }
+
+  .header__search {
+    width: 180px;
+  }
+
+  .header__profile-info {
+    display: none;
+  }
+}
+
+@media (max-width: 540px) {
+  .header__search {
+    display: none;
+  }
+}
